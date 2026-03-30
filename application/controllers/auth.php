@@ -56,7 +56,7 @@ public function index()
                     redirect('admin');
                     
                 } else {
-                redirect('admin');
+                redirect('user');
 
                 }
                 }else{
@@ -98,11 +98,9 @@ public function index()
             $data = [
                 'name' => htmlspecialchars($this->input->post('name', true)),
                 'email' => htmlspecialchars($this->input->post('email', true)),
-                'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
-                'is_active' => 1,
-                'date' => time()
+                'is_active' => 1
             ];
 
            $this->db->insert('user', $data);
