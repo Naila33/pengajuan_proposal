@@ -29,6 +29,7 @@ public function index()
         $this->load->view('templates/auth_header', $data);
         $this->load->view('auth/login');
         $this->load->view('templates/auth_footer');
+        
     } else {
         //validasi sukses
         $this->_login();

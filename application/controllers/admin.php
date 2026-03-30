@@ -22,7 +22,7 @@ class Admin extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $this->load->view('templates/auth_header', $data);
-        $this->load->view('menu/sidebar');
+        $this->load->view('templates/sidebar');
         $this->load->view('admin/index', $data);
         $this->load->view('templates/auth_footer');
     }
