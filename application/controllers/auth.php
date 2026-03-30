@@ -21,10 +21,6 @@ public function __construct()
 
 public function index()
     {
-        if($this->session->userdata('email')){
-            redirect('user');
-        }
-
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
@@ -60,7 +56,7 @@ public function index()
                     redirect('admin');
                     
                 } else {
-                redirect('user');
+                redirect('admin');
 
                 }
                 }else{
@@ -83,10 +79,6 @@ public function index()
 
     public function registration()
     {
-        if($this->session->userdata('email')){
-            redirect('user');
-        }
-
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'this email has already registered!'
@@ -106,9 +98,11 @@ public function index()
             $data = [
                 'name' => htmlspecialchars($this->input->post('name', true)),
                 'email' => htmlspecialchars($this->input->post('email', true)),
+                'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
-                'is_active' => 1
+                'is_active' => 1,
+                'date' => time()
             ];
 
            $this->db->insert('user', $data);
