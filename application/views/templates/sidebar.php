@@ -6,49 +6,67 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-code"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Pengajuan proposal</div>
+                <div class="sidebar-brand-text mx-3">WPU Admin </div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+
+
             <!-- QUERY MENU -->
 
             <?php 
             $role_id = $this->session->userdata('role_id');
-            // Simple menu based on role
-            if($role_id == 1) {
-                $menu_items = [
-                    ['title' => 'Dashboard', 'url' => 'admin', 'icon' => 'fas fa-fw fa-tachometer-alt'],
-                    ['title' => 'Profile', 'url' => 'admin/profile', 'icon' => 'fas fa-fw fa-user'],
-                    ['title' => 'Settings', 'url' => 'admin/settings', 'icon' => 'fas fa-fw fa-cog']
-                ];
-            } else {
-                $menu_items = [
-                    ['title' => 'Dashboard', 'url' => 'user', 'icon' => 'fas fa-fw fa-tachometer-alt'],
-                    ['title' => 'Profile', 'url' => 'user/profile', 'icon' => 'fas fa-fw fa-user'],
-                    ['title' => 'Pengajuan', 'url' => 'user/pengajuan', 'icon' => 'fas fa-fw fa-file']
-                ];
-            }
+            $querymenu = "SELECT `user_menu`.`id`, `menu`
+                            FROM `user_menu` JOIN `user_access_menu`
+                              ON `user_menu`.`id` = `user_access_menu`.`menu_id`
+                           WHERE `user_access_menu`.`role_id` = $role_id
+                        ORDER BY `user_access_menu`.`menu_id` ASC
+                        "; 
+            $menu = $this->db->query($querymenu)->result_array();
             ?>
 
 
-            <!-- MENU ITEMS -->
-            <?php foreach ($menu_items as $item) : ?>
-                <?php if(isset($title) && $title == $item['title']) : ?>
-                    <li class="nav-item active">
-                <?php else : ?>
-                    <li class="nav-item">
-                <?php endif; ?>
 
-                <a class="nav-link pb-0" href="<?= base_url($item['url']); ?>">
-                    <i class="<?= $item['icon']; ?>"></i>
-                    <span><?= $item['title']; ?></span></a>
+            <!-- LOOPING MENU -->
+             <?php foreach ($menu as $m) : ?>
+            <div class="sidebar-heading">
+                <?= $m['menu']; ?>
+            </div>
+
+            <!-- SIAPKAN SUB MENU SESUAI MENU -->
+             <?php 
+             $menuid = $m['id'];
+             $querysubmenu = "SELECT *
+                             FROM `user_sub_menu` JOIN `user_menu`
+                               ON `user_sub_menu`.`menu_id` = `user_menu`.`id`
+                            WHERE `user_sub_menu`.`menu_id` = $menuid
+                              AND `user_sub_menu`.`is_active` = 1
+                         ";
+
+             $submenu = $this->db->query($querysubmenu)->result_array();            
+             ?>
+
+
+                <?php foreach($submenu as $sm) : ?>
+
+                    <?php if($title == $sm['title']) : ?>
+                        <li class="nav-item active">
+                    <?php else : ?>
+                        <li class="nav-item">
+                    <?php endif; ?>
+
+                <a class="nav-link pb-0" href="<?= base_url($sm['url']); ?>">
+                    <i class="<?= $sm['icon']; ?>"></i>
+                    <span><?= $sm['title']; ?></span></a>
             </li>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-            <hr class="sidebar-divider mt-3">
+                <hr class="sidebar-divider mt-3">
+
+                <?php endforeach; ?>
 
 
             <!-- Nav Item - Charts -->
