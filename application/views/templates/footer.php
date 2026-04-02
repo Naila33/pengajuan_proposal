@@ -302,4 +302,266 @@
                 }
             });
         });
+
+
+        $('#datatable-daftar').DataTable({
+        processing: true,
+        serverSide: true,
+        order: [],
+        
+        ajax: {
+            url: "<?= site_url('pengajuan/getdaftar') ?>",
+            type: "POST"
+        },
+        
+        columnDefs: [{
+            targets: [0, 9], 
+            orderable: false
+        }],
+        
+        columns: [{
+                data: 'no'
+            },
+            {
+                data: 'nim'
+            },
+            {
+                data: 'judul'
+            },
+            {
+                data: 'link'
+            },
+            {
+                data: 'dosen1'
+            },
+            {
+                data: 'dosen2'
+            },
+            {
+                data: 'dosen3'
+            },
+            {
+                data: 'status'
+            },
+            {
+                data: 'tanggal'
+            },
+            {
+                data: 'aksi'
+            }
+        ]
+    });
+
+    $('#formAdddaftar').on('submit', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url: "<?= site_url('pengajuan/updatedaftar') ?>",
+        type: "POST",
+        data: $(this).serialize() + '&ajax=1',
+        dataType: "json",
+        success: function(res){
+            if(res.status){
+                $('#newdaftarModal').modal('hide');
+                $('#formAdddaftar')[0].reset();
+                $('#datatable-daftar').DataTable().ajax.reload(null, false);
+            } else if(res.errors){
+                $('#err_o_nim').text(res.errors.nim || '');
+                $('#err_o_judul').text(res.errors.judul || '');
+                $('#err_o_link').text(res.errors.link || '');
+                $('#err_o_dosen1').text(res.errors.dosen1 || '');
+                $('#err_o_dosen2').text(res.errors.dosen2 || '');
+                $('#err_o_dosen3').text(res.errors.dosen3 || '');
+                $('#err_o_status').text(res.errors.status || '');
+                $('#err_o_tanggal').text(res.errors.tanggal || '');
+            }
+        },
+        error: function(xhr){
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+    // daftar : Edit -  modal
+    $(document).on('click', '.btn-edit-daftar', function(e) {
+        e.preventDefault();
+        const id = $(this).data('id');
+        $.post('<?= site_url('pengajuan/getdaftarrow') ?>', { id: id }, function(res) {
+            if (!res || !res.id) return;
+            $('#e_id').val(res.id);
+            $('#e_nim').val(res.nim);
+            $('#e_judul').val(res.judul);
+            $('#e_link').val(res.link);
+            $('#e_dosen1_id').val(res.dosen1);
+            $('#e_dosen2_id').val(res.dosen2);
+            $('#e_dosen3_id').val(res.dosen3);
+            $('#err_e_nim, #err_e_judul, #err_e_link, #err_e_dosen1_id, #err_e_dosen2_id, #err_e_dosen3_id, #err_e_status, #err_e_tanggal').text('');
+            $('#editdaftarModal').modal('show');
+        }, 'json');
+    });
+
+    // mahasiswa: Edit - submit 
+    $('#formEditdaftar').on('submit', function(e) {
+        e.preventDefault();
+        $('#err_e_nim, #err_e_judul, #err_e_link, #err_e_dosen1_id, #err_e_dosen2_id, #err_e_dosen3_id, #err_e_status, #err_e_tanggal').text('');
+        let formData = $(this).serialize(); 
+    $.post('<?= site_url('pengajuan/updatedaftar') ?>', formData, function(res) {
+            if (res && res.status) {
+                $('#editdaftarModal').modal('hide');
+                $('#datatable-daftar').DataTable().ajax.reload(null, false);
+            } else if (res && res.errors) {
+                $('#err_e_nim').text(res.errors.nim || '');
+                $('#err_e_judul').text(res.errors.judul || '');
+                $('#err_e_link').text(res.errors.link || '');
+                $('#err_e_dosen1_id').text(res.errors.dosen1_id || '');
+                $('#err_e_dosen2_id').text(res.errors.dosen2_id || '');
+                $('#err_e_dosen3_id').text(res.errors.dosen3_id || '');
+            }
+        }, 'json');
+    });
+
+    // daftar : Delete
+    $(document).on('click', '.btn-delete-daftar', function(e) {
+        e.preventDefault();
+        if (!confirm('Yakin hapus pengajuan ini?')) return;
+        const id = $(this).data('id');
+        $.post('<?= site_url('pengajuan/deletedaftarrow') ?>', { id: id }, function(res) {
+            if (res && res.status) {
+                $('#datatable-daftar').DataTable().ajax.reload(null, false);
+            } else {
+                alert(res && res.message ? res.message : 'Gagal menghapus');
+            }
+        }, 'json');
+    });
+
+
+        $('.form-check-input').on('click', function() {
+            const menuId = $(this).data('menu');
+            const roleId = $(this).data('role');
+
+            $.ajax({
+                url: "<?= base_url('admin/toggleaccess'); ?>",
+                type: 'post',
+                data: {
+                    menuId: menuId,
+                    roleId: roleId
+                },
+                success: function() {
+                    document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
+                }
+            });
+        });
+
+        $('#datatable-verif').DataTable({
+        processing: true,
+        serverSide: true,
+        order: [],
+        
+        ajax: {
+            url: "<?= site_url('pengajuan/getverif') ?>",
+            type: "POST"
+        },
+        
+        columnDefs: [{
+            targets: [0], 
+            orderable: false
+        }],
+        
+        columns: [{
+                data: 'no'
+            },
+            {
+                data: 'nim'
+            },
+            {
+                data: 'nama'
+            },
+            {
+                data: 'judul'
+            },
+            {
+                data: 'link'
+            },
+            {
+                data: 'tanggal'
+            },
+            {
+                data: 'status'
+            },
+        ]
+    });
+
+    $('#formAddverif').on('submit', function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url: "<?= site_url('pengajuan/updateverif') ?>",
+        type: "POST",
+        data: $(this).serialize() + '&ajax=1',
+        dataType: "json",
+        success: function(res){
+            if(res.status){
+                $('#newverifModal').modal('hide');
+                $('#formAdddverif')[0].reset();
+                $('#datatable-daftar').DataTable().ajax.reload(null, false);
+            } else if(res.errors){
+                $('#err_o_nim').text(res.errors.nim || '');
+                $('#err_o_judul').text(res.errors.judul || '');
+                $('#err_o_link').text(res.errors.link || '');
+                $('#err_o_dosen1').text(res.errors.dosen1 || '');
+                $('#err_o_dosen2').text(res.errors.dosen2 || '');
+                $('#err_o_dosen3').text(res.errors.dosen3 || '');
+                $('#err_o_status').text(res.errors.status || '');
+                $('#err_o_tanggal').text(res.errors.tanggal || '');
+            }
+        },
+        error: function(xhr){
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+
+function updateStatus(status){
+    let id = $('#status_id').val();
+
+    $.ajax({
+        url: "<?= site_url('pengajuan/updatestatus') ?>",
+        type: "POST",
+        data: {
+            id: id,
+            status: status
+        },
+        dataType: "json",
+        success: function(res){
+            if(res.status){
+                $('#statusModal').modal('hide');
+                $('#datatable-verif').DataTable().ajax.reload(null, false);
+            }
+        }
+    });
+}
+    $(document).on('click', '.btn-status', function(){
+    let id = $(this).data('id');
+    $('#status_id').val(id);
+    $('#statusModal').modal('show');
+});
+
+
+        $('.form-check-input').on('click', function() {
+            const menuId = $(this).data('menu');
+            const roleId = $(this).data('role');
+
+            $.ajax({
+                url: "<?= base_url('admin/toggleaccess'); ?>",
+                type: 'post',
+                data: {
+                    menuId: menuId,
+                    roleId: roleId
+                },
+                success: function() {
+                    document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
+                }
+            });
+        });
 </script>
