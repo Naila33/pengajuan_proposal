@@ -21,8 +21,8 @@ public function __construct()
 
 public function index()
     {
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('user_password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == false) { 
         $data = ['title' => 'Login'];
@@ -38,8 +38,8 @@ public function index()
 
     private function _login()
     {
-        $email =$this->input->post('email');
-        $password = $this->input->post('password'); 
+        $email =$this->input->post('user_email');
+        $password = $this->input->post('user_password'); 
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
         
@@ -80,15 +80,15 @@ public function index()
 
     public function registration()
     {
-        $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+        $this->form_validation->set_rules('user_name', 'Name', 'required|trim');
+        $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'this email has already registered!'
         ]);
-        $this->form_validation->set_rules('password1', 'password', 'required|trim|min_length[3]|matches[password2]', [
+        $this->form_validation->set_rules('user_password1', 'password', 'required|trim|min_length[3]|matches[user_password2]', [
             'matches' => 'password dont match!',
             'min_length' => 'password too short!'
         ]);
-        $this->form_validation->set_rules('password2', 'password', 'required|trim|matches[password1]');
+        $this->form_validation->set_rules('user_password2', 'password', 'required|trim|matches[user_password1]');
 
         if ( $this->form_validation->run() == false) {
             $data['title'] = 'Register';
@@ -97,9 +97,9 @@ public function index()
             $this->load->view('templates/auth_footer');
         } else {
             $data = [
-                'name' => htmlspecialchars($this->input->post('name', true)),
-                'email' => htmlspecialchars($this->input->post('email', true)),
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+                'name' => htmlspecialchars($this->input->post('user_name', true)),
+                'email' => htmlspecialchars($this->input->post('user_email', true)),
+                'password' => password_hash($this->input->post('user_password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
                 'is_active' => 1
             ];

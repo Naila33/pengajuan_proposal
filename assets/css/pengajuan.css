@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f4f5fa;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 210px;
+    background: #1e1548;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sidebar-logo {
+    padding: 20px 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+    background: #6c3ce1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.logo-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.sidebar-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 6px;
+    margin-bottom: 6px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    margin-bottom: 2px;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.85);
+}
+
+.nav-item.active {
+    background: #6c3ce1;
+    color: #fff;
+}
+
+.nav-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 20px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 14px 12px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 32px 36px;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.page-sub {
+    font-size: 13px;
+    color: #9999aa;
+    margin-top: 3px;
+}
+
+/* ALERT */
+.alert-info {
+    background: #f0ecfd;
+    border-left: 3px solid #6c3ce1;
+    border-radius: 8px;
+    padding: 11px 16px;
+    font-size: 13px;
+    color: #5a35c0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #ebebf0;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 20px 28px 18px;
+    border-bottom: 1px solid #f2f2f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+}
+
+.card-header-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 3px;
+}
+
+.card-header-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+/* SECTION DIVIDER */
+.section-divider {
+    padding: 13px 28px;
+    background: #fafafa;
+    border-bottom: 1px solid #f2f2f6;
+    border-top: 1px solid #f2f2f6;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6c3ce1;
+}
+
+/* FIELD ROW — label kiri, input kanan */
+.field-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    padding: 15px 28px;
+    border-bottom: 1px solid #f4f4f8;
+    gap: 24px;
+}
+
+.field-row:last-child {
+    border-bottom: none;
+}
+
+.field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+}
+
+.field-hint {
+    font-size: 11px;
+    color: #bbb;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+/* INPUT */
+.form-input {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1a2e;
+    background: #fff;
+    border: 1px solid #e4e4ec;
+    border-radius: 8px;
+    padding: 9px 13px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    width: 100%;
+}
+
+.form-input:focus {
+    border-color: #6c3ce1;
+    box-shadow: 0 0 0 3px rgba(108,60,225,0.08);
+}
+
+/* readonly — putih, border tipis, teks muted */
+.form-input[readonly] {
+    color: #888;
+    background: #fff;
+    border-color: #f0f0f5;
+    cursor: default;
+}
+
+/* SELECT */
+select.form-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%236c3ce1' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+    cursor: pointer;
+}
+
+/* CARD FOOTER */
+.card-footer {
+    padding: 16px 28px;
+    background: #fafafa;
+    border-top: 1px solid #f2f2f6;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background: #6c3ce1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-submit {
+    background: #6c3ce1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-submit:hover {
+    background: #5a2ec8;
+}
+
+.btn-cancel {
+    background: transparent;
+    color: #888;
+    border: 1px solid #e4e4ec;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-outline {
+    background: #fff;
+    color: #555;
+    border: 1px solid #e4e4ec;
+    border-radius: 7px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}

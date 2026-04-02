@@ -35,7 +35,11 @@ $config['base_url'] = 'http://localhost/pengajuan_proposal/';
 | variable so that it is blank.
 |
 */
+<<<<<<< HEAD
+$config['index_page'] = 'index.php';
+=======
 $config['index_page'] = '';
+>>>>>>> 0c66f3730a598868b114786201d728af3cc684ae
 
 /*
 |--------------------------------------------------------------------------
