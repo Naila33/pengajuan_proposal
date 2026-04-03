@@ -31,10 +31,10 @@
             )->get('user')->row_array();
 
             $this->load->view('templates/headeradmin', $data);
-            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/sidebaradmin', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('pengajuan/daftar_pengajuan', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/footeradmin');
         }
 
 
@@ -74,10 +74,10 @@ $data['dosen_list'] = $this->db->get('dosen')->result_array();
 
 
         $this->load->view('templates/headeradmin', $data);
-        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/sidebaradmin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('pengajuan/daftar_pengajuan', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footeradmin');
     } else {
         $this->db->insert('pengajuan_proposal', [
             'nim' => $this->input->post('nim'),
@@ -226,10 +226,10 @@ public function getdaftarrow()
             $data['open_modal'] = true;
         }
         $this->load->view('templates/headeradmin', $data);
-        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/sidebaradmin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('pengajuan/verifikasi', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footeradmin');
     } else {
         $this->db->insert('pengajuan_proposal', [
             'nim' => $this->input->post('nim'),
