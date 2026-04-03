@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<<<<<<< HEAD
-<html>
-<head>
-    <title><?= $title ?? 'App'; ?></title>
-
-    <!-- CSS utama -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard.css'); ?>">
-
-    <!-- CSS tambahan (dinamis) -->
-    <?php if (!empty($css)) : ?>
-        <link rel="stylesheet" href="<?= base_url('assets/css/' . $css . '.css'); ?>">
-    <?php endif; ?>
-</head>
-<body>
-=======
-<html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -44,4 +26,4 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
->>>>>>> 0c66f3730a598868b114786201d728af3cc684ae
+
