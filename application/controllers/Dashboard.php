@@ -48,13 +48,13 @@ public function index()
 
         $this->load->view('templates/headeradmin', $data);
 
-        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/sidebaradmin', $data);
 
         $this->load->view('templates/topbar', $data);
 
         $this->load->view('dashboard/index', $data);
 
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footeradmin');
 
         
 
