@@ -31,10 +31,10 @@
             )->get('user')->row_array();
 
             $this->load->view('templates/headeradmin', $data);
-            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/sidebaradmin', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('data/data_dosen', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/footeradmin');
         }
 
 
@@ -66,10 +66,10 @@
             $data['open_modal'] = true;
         }
         $this->load->view('templates/headeradmin', $data);
-        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/sidebaradmin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('data/data_dos', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footeradmin');
     } else {
         $this->db->insert('dosen', [
             'nidn' => $this->input->post('nidn'),
@@ -192,10 +192,10 @@ public function datasiswa()
             $data['open_modal'] = true;
         }
         $this->load->view('templates/headeradmin', $data);
-        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/sidebaradmin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('data/data_mahasiswa', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footeradmin');
     } else {
         $this->db->insert('mahasiswa', [
             'nim' => $this->input->post('nim'),
