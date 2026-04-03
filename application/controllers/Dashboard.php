@@ -46,7 +46,7 @@ public function index()
 
 
 
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/headeradmin', $data);
 
         $this->load->view('templates/sidebar', $data);
 
