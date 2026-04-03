@@ -30,7 +30,7 @@
                 $this->session->userdata('email')
             )->get('user')->row_array();
 
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/headeradmin', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('data/data_dosen', $data);
@@ -65,7 +65,7 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data['open_modal'] = true;
         }
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/headeradmin', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('data/data_dos', $data);
@@ -191,7 +191,7 @@ public function datasiswa()
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data['open_modal'] = true;
         }
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/headeradmin', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('data/data_mahasiswa', $data);
